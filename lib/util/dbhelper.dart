@@ -10,14 +10,14 @@ class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
   String tblTodo = "todo";
   String colId = "id";
-  String colTitle = "title";
+  String colTitle = "title"; 
   String colDescription = "description";
   String colPriority = "priority";
   String colDate = "date";
 
   DbHelper._internal();
 
-  // The factory keyboard is responsible fo rthe class to be singleton.
+  // The factory keyboard is responsible for the class to be singleton.
   factory DbHelper() {
     return _dbHelper;
   }
@@ -53,8 +53,8 @@ class DbHelper {
   // This method will launch the sql query to create a db.
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, " +
-            "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT");
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, " +
+            "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)");
   }
 
   // If tsomething went wrong, this will return a 0 else, it will return the id of the record inserted.

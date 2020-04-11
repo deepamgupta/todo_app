@@ -18,7 +18,7 @@ class Todo {
 
   // Constructor 2 -> when we have an id for e.g. when we are editing the todo.
   Todo.withId(
-      this._id, this._title, this._priority, this._date, this._description);
+      this._id, this._title, this._priority, this._date, [this._description]);
 
   // Getters
   int get id => _id;
@@ -74,3 +74,4 @@ class Todo {
     this._date = o["date"];
   }
 }
+ 
