@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite: any # The db plugin
+  path_provider: any # Finds commnly used locations on file System irrespective of the OS
+  intl: ^0.15.7 # internationalization package. Includes date/number formatting and parsing, the caret (^) means that our app require greater than or equal to the version specified.
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
