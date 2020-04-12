@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/util/dbhelper.dart';
+import 'package:todo_app/screens/tododetail.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -14,16 +15,17 @@ class TodoListState extends State {
 
   @override
   Widget build(BuildContext context) {
-
     // When the screen is loaded first time
     if (todos == null) {
       todos = List<Todo>();
-      getData(); // set the todos and count class properties. 
+      getData(); // set the todos and count class properties.
     }
     return Scaffold(
       body: todoListItems(), // gets the ListView widget
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          navigateToDetail(Todo('', 3, ''));
+        },
         tooltip: "Add new Todo",
         child: new Icon(Icons.add),
       ),
@@ -50,6 +52,7 @@ class TodoListState extends State {
             subtitle: Text(this.todos[position].date),
             onTap: () {
               debugPrint("Tapped on " + this.todos[position].id.toString());
+              navigateToDetail(this.todos[position]);
             },
           ),
         );
@@ -57,23 +60,23 @@ class TodoListState extends State {
     );
   }
 
-  // This method will return void but use the setState method 
+  // This method will return void but use the setState method
   // to update the todos and count properties of our class
   void getData() {
-    final dbFuture = helper.initializeDb();  
+    final dbFuture = helper.initializeDb();
     // Get the database or initialize it if it doesnot exist.
     // dbFuture contains the future of db and not the db itself.
 
-
     dbFuture.then((result) {
-    // the then() will be executed only when the db is successfuly opened.
-    // The then() will inject a result which is db in our case.
+      // the then() will be executed only when the db is successfuly opened.
+      // The then() will inject a result which is db in our case.
       final todosFuture = helper.getTodos();
       todosFuture.then((result) {
         List<Todo> todolist = List<Todo>();
         count = result.length;
         for (int i = 0; i < count; i++) {
-          todolist.add(Todo.fromObject(result[i])); // This will transform a generic object into a Todo
+          todolist.add(Todo.fromObject(
+              result[i])); // This will transform a generic object into a Todo
           debugPrint(todolist[i].title);
         }
         setState(() {
@@ -98,6 +101,16 @@ class TodoListState extends State {
         break;
       default:
         return Colors.green;
+    }
+  }
+
+  void navigateToDetail(Todo todo) async {
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TodoDetail(todo)),
+    );
+    if(result == true){
+      getData();
     }
   }
 }

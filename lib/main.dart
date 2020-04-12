@@ -9,8 +9,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // code to Test the working of CRUD operations :-
-    // List<Todo> todos = List<Todo>();
+
+    /************** code to Test the working of CRUD operations :- *************/
+
+    // List<Todo> todos = List<Todo>();+
     // DbHelper helper = DbHelper();
 
     // // first we want to read the todos in the db.
@@ -20,9 +22,13 @@ class MyApp extends StatelessWidget {
     //     .then((result) => helper.getTodos().then((result) => todos = result));
 
     // DateTime today = DateTime.now();
-    // Todo todo = Todo("Complete Module Qcharm", 2, today.toString(),
+    // Todo todo = Todo("Assignment", 3, today.toString(),
     //     "will complete from tomorrow)");
     // var result = helper.insertTodo(todo);
+
+    /****************************************************************************/
+
+
 
     return MaterialApp(
       title: 'Todos',
@@ -30,6 +36,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
       ),
       home: MyHomePage(title: 'Todos'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
