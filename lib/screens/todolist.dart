@@ -8,18 +8,20 @@ class TodoList extends StatefulWidget {
 }
 
 class TodoListState extends State {
-  DbHelper helper = DbHelper();
+  DbHelper helper = DbHelper(); // To retrive data
   List<Todo> todos;
-  int count = 0;
+  int count = 0; // No. of records in the db
 
   @override
   Widget build(BuildContext context) {
+
+    // When the screen is loaded first time
     if (todos == null) {
       todos = List<Todo>();
-      getDate();
+      getData(); // set the todos and count class properties. 
     }
     return Scaffold(
-      body: todoListItems(),
+      body: todoListItems(), // gets the ListView widget
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         tooltip: "Add new Todo",
@@ -55,16 +57,23 @@ class TodoListState extends State {
     );
   }
 
-  void getDate() {
+  // This method will return void but use the setState method 
+  // to update the todos and count properties of our class
+  void getData() {
+    final dbFuture = helper.initializeDb();  
     // Get the database or initialize it if it doesnot exist.
-    final dbFuture = helper.initializeDb();
+    // dbFuture contains the future of db and not the db itself.
+
+
     dbFuture.then((result) {
+    // the then() will be executed only when the db is successfuly opened.
+    // The then() will inject a result which is db in our case.
       final todosFuture = helper.getTodos();
       todosFuture.then((result) {
         List<Todo> todolist = List<Todo>();
         count = result.length;
         for (int i = 0; i < count; i++) {
-          todolist.add(Todo.fromObject(result[i]));
+          todolist.add(Todo.fromObject(result[i])); // This will transform a generic object into a Todo
           debugPrint(todolist[i].title);
         }
         setState(() {
