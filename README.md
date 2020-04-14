@@ -1,16 +1,20 @@
 # todo_app
 
-A new Flutter project.
+This is a Todo list app.
 
-## Getting Started
+- Easy to use.
+- Simple UI.
+- Set priority of your tasks.
+- Delete the task when completed.
+- Edit the task.
+- Date and time of last edit.
 
-This project is a starting point for a Flutter application.
+## How to use this app?
 
-A few resources to get you started if this is your first Flutter project:
+1. Open the app in your Android or iOS smartphone.
+2. Now, to add a new Todo click on the ***+*** icon at the right bottom.
+3. Fill the ***Title, Description and choose priority*** from "High", "Medium" and "Low".
+4. Click the ***Kebab menu*** button at the top right of the screen.
+5. Click on ***Save and Back*** option.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🤗 Enjoy the app 🙏

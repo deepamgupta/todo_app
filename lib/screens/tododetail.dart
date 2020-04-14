@@ -144,7 +144,7 @@ class TodoDetailState extends State {
   }
 
   void save() {
-    todo.date = new DateFormat.yMd().format(DateTime.now());
+    todo.date = new DateFormat("d MMM yyyy, h:mm a").format(DateTime.now());
     if (todo.id != null) {
       helper.updateTodo(todo);
     } else {
