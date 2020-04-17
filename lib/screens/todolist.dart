@@ -23,8 +23,8 @@ class TodoListState extends State {
     return Scaffold(
       body: todoListItems(), // gets the ListView widget
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          navigateToDetail(Todo('', 3, ''));
+        onPressed: () { // adding a new Todo. 
+          navigateToDetail(Todo('', 3, '')); // Setting initial priority as low.
         },
         tooltip: "Add new Todo",
         child: new Icon(Icons.add),
@@ -32,8 +32,10 @@ class TodoListState extends State {
     );
   }
 
+  // Showing the currently stored Todo.
   ListView todoListItems() {
-    return ListView.builder(
+    return ListView.builder( // This will automatically adjust the space using scrolling feature.
+      // ListView is constructed with a builder method.
       itemCount: count,
       // itemBuilder takes a function which is iterated over each item in the List
       itemBuilder: (BuildContext context, int position) {
@@ -41,7 +43,7 @@ class TodoListState extends State {
         return Card(
           color: Colors.white,
           elevation: 2.0,
-          child: ListTile(
+          child: ListTile( // listTile will let the dropdown takes all the horizontal space on the screen.
             leading: CircleAvatar(
               backgroundColor: getColor(this.todos[position].priority),
               child: Text(
@@ -50,6 +52,7 @@ class TodoListState extends State {
             ),
             title: Text(this.todos[position].title),
             subtitle: Text(this.todos[position].date),
+            // When the user taps on the todo.
             onTap: () {
               debugPrint("Tapped on " + this.todos[position].id.toString());
               navigateToDetail(this.todos[position]);
@@ -83,11 +86,13 @@ class TodoListState extends State {
           todos = todolist;
           count = count;
         });
-        debugPrint("Items " + count.toString());
+        debugPrint("Items " + count.toString()); 
+        // Will print only in the debug window.
       });
     });
   }
 
+  // Getting color of priority.
   Color getColor(int priority) {
     switch (priority) {
       case 1:
@@ -107,9 +112,9 @@ class TodoListState extends State {
   void navigateToDetail(Todo todo) async {
     bool result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TodoDetail(todo)),
+      MaterialPageRoute(builder: (context) => TodoDetail(todo)), // the builder of MaterialPageRoute will call the TodoDetail class passing the todo that was passed.
     );
-    if(result == true){
+    if(result == true){ // when the operation succeeds.
       getData();
     }
   }

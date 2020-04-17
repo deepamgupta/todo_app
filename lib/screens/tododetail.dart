@@ -50,9 +50,12 @@ class TodoDetailState extends State {
         title: Text(todo.title),
         actions: <Widget>[
           PopupMenuButton<String>(
+            // The app will trigger onSelect which will call the select() method.
             onSelected: select,
             itemBuilder: (BuildContext context) {
+              //itemBuilder property takes the current context and return a map of choice.
               return choices.map((String choice) {
+                // For each element of the choices array we will return a PopUpMenuitem
                 return PopupMenuItem<String>(
                   value: choice,
                   child: Text(choice),
@@ -103,7 +106,7 @@ class TodoDetailState extends State {
                         child: Text(value),
                       );
                     }).toList(),
-                    style: textStyle,
+                    style: textStyle,  
                     value: retrievePriority(todo.priority),
                     onChanged: (value) => updatePriority(value),
                   ),
@@ -117,16 +120,21 @@ class TodoDetailState extends State {
   }
 
   void select(String value) async {
+    int result;
     switch (value) {
       case mnuSave:
         save();
         break;
       case mnuDelete:
         Navigator.pop(context, true);
-        if (todo.id == null) {
+        if (todo.id == null) { 
+          // If the id is null that means that the 
+          // user pressed the new floating action
+          // button creating a new todo which has not 
+          // been saved to the db yet.
           return;
         }
-        var result = await helper.deleteTodo(todo.id);
+        result = await helper.deleteTodo(todo.id);
         if (result != 0) {
           AlertDialog alertDialog = AlertDialog(
             title: Text("Delete Todo"),
@@ -150,6 +158,8 @@ class TodoDetailState extends State {
     } else {
       helper.insertTodo(todo);
     }
+
+    // whether user inserted or updated, we will get back to the list screen.
     Navigator.pop(context, true);
   }
 
@@ -166,7 +176,7 @@ class TodoDetailState extends State {
         break;
     }
     setState(() {
-      _priority = value;
+      this._priority = value;
     });
   }
 
