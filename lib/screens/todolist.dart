@@ -23,7 +23,8 @@ class TodoListState extends State {
     return Scaffold(
       body: todoListItems(), // gets the ListView widget
       floatingActionButton: FloatingActionButton(
-        onPressed: () { // adding a new Todo. 
+        onPressed: () {
+          // adding a new Todo.
           navigateToDetail(Todo('', 3, '')); // Setting initial priority as low.
         },
         tooltip: "Add new Todo",
@@ -34,7 +35,8 @@ class TodoListState extends State {
 
   // Showing the currently stored Todo.
   ListView todoListItems() {
-    return ListView.builder( // This will automatically adjust the space using scrolling feature.
+    return ListView.builder(
+      // This will automatically adjust the space using scrolling feature.
       // ListView is constructed with a builder method.
       itemCount: count,
       // itemBuilder takes a function which is iterated over each item in the List
@@ -43,7 +45,8 @@ class TodoListState extends State {
         return Card(
           color: Colors.white,
           elevation: 2.0,
-          child: ListTile( // listTile will let the dropdown takes all the horizontal space on the screen.
+          child: ListTile(
+            // listTile will let the dropdown takes all the horizontal space on the screen.
             leading: CircleAvatar(
               backgroundColor: getColor(this.todos[position].priority),
               child: Text(
@@ -86,7 +89,7 @@ class TodoListState extends State {
           todos = todolist;
           count = count;
         });
-        debugPrint("Items " + count.toString()); 
+        debugPrint("Items " + count.toString());
         // Will print only in the debug window.
       });
     });
@@ -112,9 +115,12 @@ class TodoListState extends State {
   void navigateToDetail(Todo todo) async {
     bool result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TodoDetail(todo)), // the builder of MaterialPageRoute will call the TodoDetail class passing the todo that was passed.
+      MaterialPageRoute(
+          builder: (context) => TodoDetail(
+              todo)), // the builder of MaterialPageRoute will call the TodoDetail class passing the todo that was passed.
     );
-    if(result == true){ // when the operation succeeds.
+    if (result == true) {
+      // when the operation succeeds.
       getData();
     }
   }
