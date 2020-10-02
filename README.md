@@ -1,11 +1,11 @@
 # todo_app
 
-This is a Todo list app.
+This is an app for Todo-List.
 
 - Easy to use.
 - Simple UI.
 - Set priority of your tasks.
-- Delete the task when completed.
+- Delete the task when gets completed.
 - Edit the task.
 - Date and time of last edit.
 
